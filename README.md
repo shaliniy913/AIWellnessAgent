@@ -30,7 +30,7 @@ path taken depends on the data, not a fixed script.
 ## Project structure
 
 ```
-AIWellness/
+AIWellnessAgent/
 ├── streamlit_app.py         <- run this — single entrypoint for the whole app
 ├── orchestrate.py             <- the agentic pipeline (see diagram above)
 ├── recovery_score.py           <- deterministic recovery score calculator
@@ -57,7 +57,7 @@ AIWellness/
 
 ```bash
 git clone <this-repo-url>
-cd AIWellness
+cd AIWellnessAgent
 python3 -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\Activate.ps1
 pip install -r requirements.txt
