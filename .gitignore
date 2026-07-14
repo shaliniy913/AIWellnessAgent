@@ -1,0 +1,17 @@
+# Secrets
+.env
+
+# Generated vector index (auto-built on first run, see streamlit_app.py)
+chroma_db/
+
+# Generated monitoring log (auto-created on first run)
+logs.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Streamlit
+.streamlit/secrets.toml
