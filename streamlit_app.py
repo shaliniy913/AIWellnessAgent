@@ -159,20 +159,33 @@ for turn in st.session_state.history:
 
 user_text = st.chat_input("e.g. Should I do leg day today?")
 
+if "query_count" not in st.session_state:
+    st.session_state.query_count = 0
+
 if user_text:
     st.session_state.history.append({"role": "user", "content": user_text})
     with st.chat_message("user"):
         st.markdown(user_text)
 
-    result = run_pipeline(
-        user_text=user_text,
-        csv_path=str(CSV_PATH),
-        target_date=selected_date,
-        overrides=overrides,
-        use_llm=use_llm,
+    is_first_query = st.session_state.query_count == 0
+    spinner_text = (
+        "Thinking... (first question of the session — warming up the guidance "
+        "search and LLM connection, this one can take a bit longer)"
+        if is_first_query else
+        "Thinking..."
     )
 
     with st.chat_message("assistant"):
+        with st.spinner(spinner_text):
+            result = run_pipeline(
+                user_text=user_text,
+                csv_path=str(CSV_PATH),
+                target_date=selected_date,
+                overrides=overrides,
+                use_llm=use_llm,
+            )
+        st.session_state.query_count += 1
+
         st.markdown(result["final_response"])
 
         if not result["safety_flagged"] or result["safety_category"] == "pregnancy_caution":
