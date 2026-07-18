@@ -30,34 +30,33 @@ path taken depends on the data, not a fixed script.
 ## Project structure
 
 ```
-AIWellness/
-├── streamlit_app.py         <- run this — single entrypoint for the whole app
-├── orchestrate.py             <- the agentic pipeline (see diagram above)
-├── recovery_score.py           <- deterministic recovery score calculator
-├── safety_checker.py            <- keyword/pattern-based safety guardrail
-├── data/
-│   └── raw/
-│       └── p01_sanitized.csv     <- wearable-style metrics + baselines
-├── rag_pipeline/                  <- self-contained RAG subsystem
-│   ├── guidance_docs/               <- source PDFs (sleep, recovery, safety, etc.)
-│   ├── chroma_db/                    <- generated on first run, not committed
-│   ├── ingest.py                      <- builds the vector index (auto-run if missing)
-│   ├── retrieve.py                     <- retrieve_guidance(), called by orchestrate.py
-│   └── README.md                       <- RAG-specific setup/troubleshooting notes
-├── tests/
-│   ├── test_recovery_score.py
-│   └── test_safety_checker.py
-├── requirements.txt                <- one file, covers the whole project
-├── .env.example
-├── .gitignore
-└── logs.csv                          <- generated per-interaction monitoring log
+AIWellnessAgent/
+    1. streamlit_app.py         <- run this — single entrypoint for the whole app
+    2. orchestrate.py             <- the agentic pipeline (see diagram above)
+    3. recovery_score.py           <- deterministic recovery score calculator
+    4. safety_checker.py            <- keyword/pattern-based safety guardrail
+    5. data/
+         raw/
+           p01_sanitized.csv     <- wearable-style metrics + baselines
+    6. guidance_docs/               <- source PDFs (sleep, recovery, safety, etc.)
+    7. chroma_db/                    <- generated on first run, not committed
+    8. ingest.py                      <- builds the vector index (auto-run if missing)
+    9. retrieve.py                     <- retrieve_guidance(), called by orchestrate.py
+    10. README.md                       <- RAG-specific setup/troubleshooting notes
+    11. tests/
+          test_recovery_score.py
+          test_safety_checker.py
+    12. requirements.txt                <- one file, covers the whole project
+    13. .env.example
+    14. .gitignore
+    15. logs.csv                          <- generated per-interaction monitoring log
 ```
 
 ## Setup
 
 ```bash
 git clone <this-repo-url>
-cd AIWellness
+cd AIWellnessAgent
 python3 -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\Activate.ps1
 pip install -r requirements.txt
